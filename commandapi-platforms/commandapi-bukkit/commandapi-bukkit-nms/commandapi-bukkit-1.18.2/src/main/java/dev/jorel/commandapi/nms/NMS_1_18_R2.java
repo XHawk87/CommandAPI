@@ -38,8 +38,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.Predicate;
 import java.util.function.ToIntFunction;
 
-import com.mojang.brigadier.tree.CommandNode;
-import com.mojang.brigadier.tree.LiteralCommandNode;
+import dev.jorel.commandapi.*;
 import dev.jorel.commandapi.wrappers.*;
 import net.minecraft.advancements.critereon.MinMaxBounds;
 import net.minecraft.commands.arguments.*;
@@ -58,7 +57,6 @@ import org.bukkit.advancement.Advancement;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
-import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.SimpleCommandMap;
 import org.bukkit.craftbukkit.v1_18_R2.CraftLootTable;
@@ -72,12 +70,12 @@ import org.bukkit.craftbukkit.v1_18_R2.entity.CraftEntity;
 import org.bukkit.craftbukkit.v1_18_R2.help.CustomHelpTopic;
 import org.bukkit.craftbukkit.v1_18_R2.help.SimpleHelpMap;
 import org.bukkit.craftbukkit.v1_18_R2.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_18_R2.potion.CraftPotionEffectType;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.help.HelpTopic;
 import org.bukkit.inventory.Recipe;
-import org.bukkit.potion.PotionEffectType;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.io.Files;
@@ -92,9 +90,6 @@ import com.mojang.brigadier.suggestion.SuggestionProvider;
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.logging.LogUtils;
 
-import dev.jorel.commandapi.CommandAPI;
-import dev.jorel.commandapi.CommandAPIHandler;
-import dev.jorel.commandapi.SafeVarHandle;
 import dev.jorel.commandapi.arguments.ArgumentSubType;
 import dev.jorel.commandapi.arguments.SuggestionProviders;
 import dev.jorel.commandapi.commandsenders.AbstractCommandSender;
@@ -376,11 +371,6 @@ public class NMS_1_18_R2 extends NMS_Common {
 	}
 
 	@Override
-	public CommandDispatcher<CommandSourceStack> getResourcesDispatcher() {
-		return this.<MinecraftServer>getMinecraftServer().getCommands().getDispatcher();
-	}
-
-	@Override
 	public CommandSourceStack getBrigadierSourceFromCommandSender(AbstractCommandSender<? extends CommandSender> senderWrapper) {
 		return VanillaCommandWrapper.getListener(senderWrapper.getSource());
 	}
@@ -573,10 +563,6 @@ public class NMS_1_18_R2 extends NMS_Common {
 		ResourceLocation resourceLocation = ResourceLocationArgument.getId(cmdCtx, key);
 		return new CraftLootTable(fromResourceLocation(resourceLocation), this.<MinecraftServer>getMinecraftServer().getLootTables().get(resourceLocation));
 	}
-	
-	public NamespacedKey getMinecraftKey(CommandContext<CommandSourceStack> cmdCtx, String key) {
-		return fromResourceLocation(ResourceLocationArgument.getId(cmdCtx, key));
-	}
 
 	@Override
 	public ParticleData<?> getParticle(CommandContext<CommandSourceStack> cmdCtx, String key) {
@@ -637,8 +623,12 @@ public class NMS_1_18_R2 extends NMS_Common {
 	}
 
 	@Override
-	public PotionEffectType getPotionEffect(CommandContext<CommandSourceStack> cmdCtx, String key) throws CommandSyntaxException {
-		return PotionEffectType.getByKey(fromResourceLocation(Registry.MOB_EFFECT.getKey(MobEffectArgument.getEffect(cmdCtx, key))));
+	public Object getPotionEffect(CommandContext<CommandSourceStack> cmdCtx, String key, ArgumentSubType subType) throws CommandSyntaxException {
+		return switch (subType) {
+			case POTION_EFFECT_POTION_EFFECT -> CraftPotionEffectType.getByKey(fromResourceLocation(Registry.MOB_EFFECT.getKey(MobEffectArgument.getEffect(cmdCtx, key))));
+			case POTION_EFFECT_NAMESPACEDKEY -> fromResourceLocation(ResourceLocationArgument.getId(cmdCtx, key));
+			default -> throw new IllegalArgumentException("Unexpected value: " + subType);
+		};
 	}
 
 	@Override
@@ -724,6 +714,7 @@ public class NMS_1_18_R2 extends NMS_Common {
 			};
 			case BIOMES -> _ArgumentSyntheticBiome()::listSuggestions;
 			case ENTITIES -> net.minecraft.commands.synchronization.SuggestionProviders.SUMMONABLE_ENTITIES;
+			case POTION_EFFECTS -> (context, builder) -> SharedSuggestionProvider.suggestResource(Registry.MOB_EFFECT.keySet(), builder);
 			default -> (context, builder) -> Suggestions.empty();
 		};
 	}
@@ -739,23 +730,17 @@ public class NMS_1_18_R2 extends NMS_Common {
 	}
 
 	@Override
+	public Set<NamespacedKey> getTags() {
+		Set<NamespacedKey> result = new HashSet<>();
+		for (ResourceLocation resourceLocation : this.<MinecraftServer>getMinecraftServer().getFunctions().getTagNames()) {
+			result.add(fromResourceLocation(resourceLocation));
+		}
+		return result;
+	}
+
+	@Override
 	public World getWorldForCSS(CommandSourceStack css) {
 		return (css.getLevel() == null) ? null : css.getLevel().getWorld();
-	}
-
-	@Override
-	public boolean isVanillaCommandWrapper(Command command) {
-		return command instanceof VanillaCommandWrapper;
-	}
-
-	@Override
-	public Command wrapToVanillaCommandWrapper(LiteralCommandNode<CommandSourceStack> node) {
-		return new VanillaCommandWrapper(this.<MinecraftServer>getMinecraftServer().vanillaCommandDispatcher, node);
-	}
-
-	@Override
-	public boolean isBukkitCommandWrapper(CommandNode<CommandSourceStack> node) {
-		return node.getCommand() instanceof BukkitCommandWrapper;
 	}
 
 	@Differs(from = "1.18", by = "Completely rewritten way of reloading datapacks")
@@ -892,4 +877,15 @@ public class NMS_1_18_R2 extends NMS_Common {
 		}
 	}
 
+	@Override
+	public CommandRegistrationStrategy<CommandSourceStack> createCommandRegistrationStrategy() {
+		return new SpigotCommandRegistration<>(
+			this.<MinecraftServer>getMinecraftServer().vanillaCommandDispatcher.getDispatcher(),
+			(SimpleCommandMap) getPaper().getCommandMap(),
+			() -> this.<MinecraftServer>getMinecraftServer().getCommands().getDispatcher(),
+			command -> command instanceof VanillaCommandWrapper,
+			node -> new VanillaCommandWrapper(this.<MinecraftServer>getMinecraftServer().vanillaCommandDispatcher, node),
+			node -> node.getCommand() instanceof BukkitCommandWrapper
+		);
+	}
 }

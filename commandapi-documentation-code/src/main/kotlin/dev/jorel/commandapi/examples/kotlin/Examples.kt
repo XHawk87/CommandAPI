@@ -36,6 +36,7 @@ import org.bukkit.command.CommandSender
 import org.bukkit.command.ProxiedCommandSender
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.*
+import org.bukkit.help.HelpTopic
 import org.bukkit.inventory.ComplexRecipe
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.Recipe
@@ -410,6 +411,23 @@ CommandAPICommand("remove")
 /* ANCHOR_END: argumentEntities1 */
 
 /* ANCHOR: argumentEntities2 */
+val noSelectorSuggestions = PlayerArgument("target")
+    .replaceSafeSuggestions(SafeSuggestions.suggest {
+        Bukkit.getOnlinePlayers().toTypedArray()
+    })
+/* ANCHOR_END: argumentEntities2 */
+
+/* ANCHOR: argumentEntities3 */
+CommandAPICommand("warp")
+    .withArguments(noSelectorSuggestions)
+    .executesPlayer(PlayerCommandExecutor { player, args ->
+        val target = args["target"] as Player
+        player.teleport(target)
+    })
+    .register()
+/* ANCHOR_END: argumentEntities3 */
+
+/* ANCHOR: argumentEntities4 */
 CommandAPICommand("spawnmob")
     .withArguments(EntityTypeArgument("entity"))
     .withArguments(IntegerArgument("amount", 1, 100)) // Prevent spawning too many entities
@@ -419,7 +437,7 @@ CommandAPICommand("spawnmob")
         }
     })
     .register()
-/* ANCHOR_END: argumentEntities2 */
+/* ANCHOR_END: argumentEntities4 */
 }
 
 fun argument_function() {
@@ -750,6 +768,25 @@ CommandAPICommand("potion")
     })
     .register()
 /* ANCHOR_END: argumentPotion1 */
+/* ANCHOR: argumentPotion2 */
+CommandAPICommand("potion")
+    .withArguments(PlayerArgument("target"))
+    .withArguments(PotionEffectArgument.NamespacedKey("potion"))
+    .withArguments(TimeArgument("duration"))
+    .withArguments(IntegerArgument("strength"))
+    .executes(CommandExecutor { _, args ->
+        val target = args["target"] as Player
+        val potionKey = args["potion"] as NamespacedKey
+        val duration = args["duration"] as Int
+        val strength = args["strength"] as Int
+
+        val potion = PotionEffectType.getByKey(potionKey)!!
+
+        // Add the potion effect to the target player
+        target.addPotionEffect(PotionEffect(potion, duration, strength))
+    })
+    .register()
+/* ANCHOR_END: argumentPotion2 */
 }
 
 fun argument_primitives() {
@@ -1286,6 +1323,31 @@ CommandAPICommand("mycommand")
     })
     .register();
 /* ANCHOR_END: commandArguments3 */
+
+/* ANCHOR: commandArguments4 */
+val nameArgument = StringArgument("name")
+val amountArgument = IntegerArgument("amount")
+val playerArgument = PlayerArgument("player")
+val targetArgument = PlayerArgument("target")
+val messageArgument = GreedyStringArgument("message")
+
+CommandAPICommand("mycommand")
+    .withArguments(nameArgument)
+    .withArguments(amountArgument)
+    .withOptionalArguments(playerArgument)
+    .withOptionalArguments(targetArgument)
+    .withOptionalArguments(messageArgument)
+    .executesPlayer(PlayerCommandExecutor { player, args ->
+        val name: String = args.getByArgument(nameArgument)!!
+        val amount: Int = args.getByArgument(amountArgument)!!
+        val p: Player = args.getByArgumentOrDefault(playerArgument, player)
+        val target: Player = args.getByArgumentOrDefault(targetArgument, player)
+        val message: String = args.getOptionalByArgument(messageArgument).orElse("Hello!")
+
+        // Do whatever with these values
+    })
+    .register();
+/* ANCHOR_END: commandArguments4 */
 }
 
 fun commandFailures() {
@@ -1601,6 +1663,42 @@ CommandAPICommand("mycmd")
     })
     .register()
 /* ANCHOR_END: help2 */
+}
+
+/* ANCHOR: help3 */
+fun makeHelp(command: String): HelpTopic = object: HelpTopic() {
+    override fun getShortText(): String = "Says hi"
+
+    override fun getFullText(forWho: CommandSender): String {
+        var helpText = ""
+        if (forWho is Player) {
+            // Make use of the player's locale to make language-specific help!
+            val playerLocale = forWho.locale()
+            if (playerLocale.getLanguage() == "en") {
+                helpText = "Broadcasts \"Hi!\" to everyone on the server"
+            } else if (playerLocale.getLanguage() == "de") {
+                helpText = "Sendet \"Hi!\" an alle auf dem Server"
+            }
+        } else {
+            helpText = "Broadcasts \"Hi!\" to everyone on the server"
+        }
+        return helpText
+    }
+
+    // Allow anyone to see this help topic
+    override fun canSee(player: CommandSender): Boolean = true
+}
+/* ANCHOR_END: help3 */
+
+fun help2() {
+/* ANCHOR: help4 */
+return CommandAPICommand("mycmd")
+    .withHelp(makeHelp("mycmd"))
+    .executes(CommandExecutor { _, _ ->
+        Bukkit.broadcastMessage("Hi!")
+    })
+    .register()
+/* ANCHOR_END: help4 */
 }
 
 fun listed() {

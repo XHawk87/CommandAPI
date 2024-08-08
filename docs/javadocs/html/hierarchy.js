@@ -243,6 +243,7 @@ var hierarchy =
     [ "com.mojang.brigadier.context.CommandContext< S >", "classcom_1_1mojang_1_1brigadier_1_1context_1_1_command_context.html", null ],
     [ "com.mojang.brigadier.context.CommandContextBuilder< S >", "classcom_1_1mojang_1_1brigadier_1_1context_1_1_command_context_builder.html", null ],
     [ "com.mojang.brigadier.CommandDispatcher< S >", "classcom_1_1mojang_1_1brigadier_1_1_command_dispatcher.html", null ],
+    [ "com.mojang.brigadier.CommandDispatcher< Source >", "classcom_1_1mojang_1_1brigadier_1_1_command_dispatcher.html", null ],
     [ "com.mojang.brigadier.exceptions.CommandExceptionType", "interfacecom_1_1mojang_1_1brigadier_1_1exceptions_1_1_command_exception_type.html", [
       [ "com.mojang.brigadier.exceptions.Dynamic2CommandExceptionType", "classcom_1_1mojang_1_1brigadier_1_1exceptions_1_1_dynamic2_command_exception_type.html", null ],
       [ "com.mojang.brigadier.exceptions.Dynamic3CommandExceptionType", "classcom_1_1mojang_1_1brigadier_1_1exceptions_1_1_dynamic3_command_exception_type.html", null ],
@@ -252,6 +253,10 @@ var hierarchy =
       [ "com.mojang.brigadier.exceptions.SimpleCommandExceptionType", "classcom_1_1mojang_1_1brigadier_1_1exceptions_1_1_simple_command_exception_type.html", null ]
     ] ],
     [ "dev.jorel.commandapi.CommandPermission", "classdev_1_1jorel_1_1commandapi_1_1_command_permission.html", null ],
+    [ "dev.jorel.commandapi.CommandRegistrationStrategy< Source >", "classdev_1_1jorel_1_1commandapi_1_1_command_registration_strategy.html", [
+      [ "dev.jorel.commandapi.PaperCommandRegistration< Source >", "classdev_1_1jorel_1_1commandapi_1_1_paper_command_registration.html", null ],
+      [ "dev.jorel.commandapi.SpigotCommandRegistration< Source >", "classdev_1_1jorel_1_1commandapi_1_1_spigot_command_registration.html", null ]
+    ] ],
     [ "Comparable", null, [
       [ "com.mojang.brigadier.suggestion.Suggestion", "classcom_1_1mojang_1_1brigadier_1_1suggestion_1_1_suggestion.html", [
         [ "com.mojang.brigadier.suggestion.IntegerSuggestion", "classcom_1_1mojang_1_1brigadier_1_1suggestion_1_1_integer_suggestion.html", null ]
@@ -271,6 +276,7 @@ var hierarchy =
       [ "dev.jorel.commandapi.arguments.EntityTypeArgument", "classdev_1_1jorel_1_1commandapi_1_1arguments_1_1_entity_type_argument.html", null ],
       [ "dev.jorel.commandapi.arguments.FunctionArgument", "classdev_1_1jorel_1_1commandapi_1_1arguments_1_1_function_argument.html", null ],
       [ "dev.jorel.commandapi.arguments.LootTableArgument", "classdev_1_1jorel_1_1commandapi_1_1arguments_1_1_loot_table_argument.html", null ],
+      [ "dev.jorel.commandapi.arguments.PotionEffectArgument.NamespacedKey", "classdev_1_1jorel_1_1commandapi_1_1arguments_1_1_potion_effect_argument_1_1_namespaced_key.html", null ],
       [ "dev.jorel.commandapi.arguments.RecipeArgument", "classdev_1_1jorel_1_1commandapi_1_1arguments_1_1_recipe_argument.html", null ],
       [ "dev.jorel.commandapi.arguments.SoundArgument", "classdev_1_1jorel_1_1commandapi_1_1arguments_1_1_sound_argument.html", null ],
       [ "dev.jorel.commandapi.arguments.SoundArgument.NamespacedKey", "classdev_1_1jorel_1_1commandapi_1_1arguments_1_1_sound_argument_1_1_namespaced_key.html", null ]
@@ -329,6 +335,7 @@ var hierarchy =
     [ "com.mojang.brigadier.Message", "interfacecom_1_1mojang_1_1brigadier_1_1_message.html", [
       [ "com.mojang.brigadier.LiteralMessage", "classcom_1_1mojang_1_1brigadier_1_1_literal_message.html", null ]
     ] ],
+    [ "dev.jorel.commandapi.MojangMappedVersionHandler", "interfacedev_1_1jorel_1_1commandapi_1_1_mojang_mapped_version_handler.html", null ],
     [ "dev.jorel.commandapi.arguments.MultiLiteral< Argument< String > >", "interfacedev_1_1jorel_1_1commandapi_1_1arguments_1_1_multi_literal.html", [
       [ "dev.jorel.commandapi.arguments.MultiLiteralArgument", "classdev_1_1jorel_1_1commandapi_1_1arguments_1_1_multi_literal_argument.html", null ]
     ] ],
@@ -431,6 +438,7 @@ var hierarchy =
       [ "dev.jorel.commandapi.executors.RemoteConsoleResultingCommandExecutor", "interfacedev_1_1jorel_1_1commandapi_1_1executors_1_1_remote_console_resulting_command_executor.html", null ],
       [ "dev.jorel.commandapi.executors.RemoteConsoleResultingExecutionInfo", "interfacedev_1_1jorel_1_1commandapi_1_1executors_1_1_remote_console_resulting_execution_info.html", null ]
     ] ],
+    [ "com.mojang.brigadier.tree.RootCommandNode< Source >", "classcom_1_1mojang_1_1brigadier_1_1tree_1_1_root_command_node.html", null ],
     [ "dev.jorel.commandapi.wrappers.Rotation", "classdev_1_1jorel_1_1commandapi_1_1wrappers_1_1_rotation.html", null ],
     [ "RuntimeException", null, [
       [ "dev.jorel.commandapi.exceptions.BadLiteralException", "classdev_1_1jorel_1_1commandapi_1_1exceptions_1_1_bad_literal_exception.html", null ],
@@ -527,6 +535,7 @@ var hierarchy =
     ] ],
     [ "dev.jorel.commandapi.arguments.SafeOverrideableArgument< org.bukkit.NamespacedKey, org.bukkit.NamespacedKey >", "classdev_1_1jorel_1_1commandapi_1_1arguments_1_1_safe_overrideable_argument.html", [
       [ "dev.jorel.commandapi.arguments.BiomeArgument.NamespacedKey", "classdev_1_1jorel_1_1commandapi_1_1arguments_1_1_biome_argument_1_1_namespaced_key.html", null ],
+      [ "dev.jorel.commandapi.arguments.PotionEffectArgument.NamespacedKey", "classdev_1_1jorel_1_1commandapi_1_1arguments_1_1_potion_effect_argument_1_1_namespaced_key.html", null ],
       [ "dev.jorel.commandapi.arguments.SoundArgument.NamespacedKey", "classdev_1_1jorel_1_1commandapi_1_1arguments_1_1_sound_argument_1_1_namespaced_key.html", null ]
     ] ],
     [ "dev.jorel.commandapi.arguments.SafeOverrideableArgument< ParticleData, ParticleData<?> >", "classdev_1_1jorel_1_1commandapi_1_1arguments_1_1_safe_overrideable_argument.html", [

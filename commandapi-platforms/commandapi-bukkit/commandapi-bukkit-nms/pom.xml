@@ -26,7 +26,7 @@
 	<parent>
 		<artifactId>commandapi-bukkit</artifactId>
 		<groupId>dev.jorel</groupId>
-		<version>9.4.0-SNAPSHOT</version>
+		<version>9.6.0-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>commandapi-bukkit-nms</artifactId>
@@ -35,6 +35,8 @@
 	<modules>
 		<!-- NMS versions -->
 		<module>commandapi-bukkit-nms-common</module>
+		<module>commandapi-bukkit-1.21</module>
+		<module>commandapi-bukkit-1.20.5</module>
 		<module>commandapi-bukkit-1.20.3</module>
 		<module>commandapi-bukkit-1.20.2</module>
 		<module>commandapi-bukkit-1.20</module>
@@ -49,10 +51,6 @@
 		<module>commandapi-bukkit-1.17</module>
 		<module>commandapi-bukkit-1.17.1</module>
 		<module>commandapi-bukkit-1.16.5</module>
-		<module>commandapi-bukkit-1.16.4</module>
-		<module>commandapi-bukkit-1.16.2</module>
-		<module>commandapi-bukkit-1.16.1</module>
-		<module>commandapi-bukkit-1.15</module>
 
 		<!-- The thing you actually include -->
 		<module>commandapi-bukkit-nms-dependency</module>

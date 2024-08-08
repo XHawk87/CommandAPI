@@ -54,6 +54,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.ProxiedCommandSender;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.*;
+import org.bukkit.help.HelpTopic;
 import org.bukkit.inventory.ComplexRecipe;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
@@ -459,6 +460,23 @@ new CommandAPICommand("remove")
 /* ANCHOR_END: argumentEntities1 */
 
 /* ANCHOR: argumentEntities2 */
+Argument<?> noSelectorSuggestions = new PlayerArgument("target")
+    .replaceSafeSuggestions(SafeSuggestions.suggest(info ->
+        Bukkit.getOnlinePlayers().toArray(new Player[0])
+    ));
+/* ANCHOR_END: argumentEntities2 */
+
+/* ANCHOR: argumentEntities3 */
+new CommandAPICommand("warp")
+    .withArguments(noSelectorSuggestions)
+    .executesPlayer((player, args) -> {
+        Player target = (Player) args.get("target");
+        player.teleport(target);
+    })
+    .register();
+/* ANCHOR_END: argumentEntities3 */
+
+/* ANCHOR: argumentEntities4 */
 new CommandAPICommand("spawnmob")
     .withArguments(new EntityTypeArgument("entity"))
     .withArguments(new IntegerArgument("amount", 1, 100)) // Prevent spawning too many entities
@@ -468,7 +486,7 @@ new CommandAPICommand("spawnmob")
         }
     })
     .register();
-/* ANCHOR_END: argumentEntities2 */
+/* ANCHOR_END: argumentEntities4 */
 }
 
 void argument_function() {
@@ -817,6 +835,25 @@ new CommandAPICommand("potion")
     })
     .register();
 /* ANCHOR_END: argumentPotion1 */
+/* ANCHOR: argumentPotion2 */
+new CommandAPICommand("potion")
+    .withArguments(new PlayerArgument("target"))
+    .withArguments(new PotionEffectArgument.NamespacedKey("potion"))
+    .withArguments(new TimeArgument("duration"))
+    .withArguments(new IntegerArgument("strength"))
+    .executes((sender, args) -> {
+        Player target = (Player) args.get("target");
+        NamespacedKey potionKey = (NamespacedKey) args.get("potion");
+        int duration = (int) args.get("duration");
+        int strength = (int) args.get("strength");
+
+        PotionEffectType potion = PotionEffectType.getByKey(potionKey);
+
+        // Add the potion effect to the target player
+        target.addPotionEffect(new PotionEffect(potion, duration, strength));
+    })
+    .register();
+/* ANCHOR_END: argumentPotion2 */
 }
 
 @SuppressWarnings("null")
@@ -1365,6 +1402,31 @@ new CommandAPICommand("mycommand")
     })
     .register();
 /* ANCHOR_END: commandArguments3 */
+
+/* ANCHOR: commandArguments4 */
+StringArgument nameArgument = new StringArgument("name");
+IntegerArgument amountArgument = new IntegerArgument("amount");
+PlayerArgument playerArgument = new PlayerArgument("player");
+PlayerArgument targetArgument = new PlayerArgument("target");
+GreedyStringArgument messageArgument = new GreedyStringArgument("message");
+
+new CommandAPICommand("mycommand")
+    .withArguments(nameArgument)
+    .withArguments(amountArgument)
+    .withOptionalArguments(playerArgument)
+    .withOptionalArguments(targetArgument)
+    .withOptionalArguments(messageArgument)
+    .executesPlayer((player, args) -> {
+        String name = args.getByArgument(nameArgument);
+        int amount = args.getByArgument(amountArgument);
+        Player p = args.getByArgumentOrDefault(playerArgument, player);
+        Player target = args.getByArgumentOrDefault(targetArgument, player);
+        String message = args.getOptionalByArgument(messageArgument).orElse("Hello!");
+
+        // Do whatever with these values
+    })
+    .register();
+/* ANCHOR_END: commandArguments4 */
 }
 
 void commandFailures() {
@@ -1680,6 +1742,52 @@ new CommandAPICommand("mycmd")
     })
     .register();
 /* ANCHOR_END: help2 */
+}
+
+/* ANCHOR: help3 */
+public HelpTopic makeHelp(String command) {
+    return new HelpTopic() {
+
+        @Override
+        public String getShortText() {
+            return "Says hi";
+        }
+
+        @Override
+        public String getFullText(CommandSender forWho) {
+            String helpText = "";
+            if (forWho instanceof Player player) {
+                // Make use of the player's locale to make language-specific help!
+                Locale playerLocale = player.locale();
+                if (playerLocale.getLanguage().equals("en")) {
+                    helpText = "Broadcasts \"Hi!\" to everyone on the server";
+                } else if (playerLocale.getLanguage().equals("de")) {
+                    helpText = "Sendet \"Hi!\" an alle auf dem Server";
+                }
+            } else {
+                helpText = "Broadcasts \"Hi!\" to everyone on the server";
+            }
+            return helpText;
+        }
+
+        // Allow anyone to see this help topic
+        @Override
+        public boolean canSee(CommandSender player) {
+            return true;
+        }
+    };
+}
+/* ANCHOR_END: help3 */
+
+void help2() {
+/* ANCHOR: help4 */
+new CommandAPICommand("mycmd")
+    .withHelp(makeHelp("mycmd"))
+    .executes((sender, args) -> {
+        Bukkit.broadcastMessage("Hi!");
+    })
+    .register();
+/* ANCHOR_END: help4 */
 }
 
 void listed() {

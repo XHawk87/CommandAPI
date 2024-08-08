@@ -1,6 +1,6 @@
 # Setting up your development environment
 
-To use the CommandAPI in your plugins, there are a few methods of adding it to your development environment. First things first, if you're using the CommandAPI plugin, you need to add the CommandAPI has a dependent in your plugin.yml:
+To use the CommandAPI in your plugins, there are a few methods of adding it to your development environment. First things first, if you're using the CommandAPI plugin, you need to add the CommandAPI as a dependent in your `plugin.yml` or `paper-plugin.yml`:
 
 <div class="multi-pre">
 
@@ -40,7 +40,7 @@ dependencies:
       <dependency>
           <groupId>dev.jorel</groupId>
           <artifactId>commandapi-bukkit-core</artifactId>
-          <version>9.4.0-SNAPSHOT</version>
+          <version>9.6.0-SNAPSHOT</version>
           <scope>provided</scope>
       </dependency>
   </dependencies>
@@ -61,7 +61,7 @@ dependencies:
 
   ```gradle
   dependencies {
-      compileOnly "dev.jorel:commandapi-bukkit-core:9.4.0-SNAPSHOT"
+      compileOnly "dev.jorel:commandapi-bukkit-core:9.6.0-SNAPSHOT"
   }
   ```
 

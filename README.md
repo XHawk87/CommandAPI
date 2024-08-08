@@ -49,24 +49,26 @@ The list of what version of the CommandAPI you'll need to run on a specific vers
 | **1.14.1, 1.14.2** | v2.0 - 5.12, 8.3.0  - 8.8.0 | 8.8.0                        | 16                                                        |
 | **1.14.3, 1.14.4** | v2.1 - 5.12, 8.3.0  - 8.8.0 | 8.8.0                        | 16                                                        |
 | **1.15.x**         | v2.3a - 5.12, 8.3.0 - 9.3.0 | 9.3.0                        | 16                                                        |
-| **1.16.1**         | v3.0 - 5.12, 8.3.0  - 9.3.0 | 9.3.0                        | 16                                                        |
-| **1.16.2**         | v4.0 - 5.12, 8.3.0  - 9.3.0 | 9.3.0                        | 16                                                        |
-| **1.16.3**         | v4.2 - 5.12, 8.3.0  - 9.3.0 | 9.3.0                        | 16                                                        |
-| **1.16.4**         | v5.2 - 5.12, 8.3.0  - 9.3.0 | 9.3.0                        | 16                                                        |
-| **1.16.5**         | v5.7 - 7.0.0, 8.3.0 - 9.3.0 | 9.3.0                        | 16                                                        |
-| **1.17**           | 6.0.x - 9.3.0               | 9.3.0                        | 16                                                        |
-| **1.17.1**         | 6.1.x - 9.3.0               | 9.3.0                        | 16                                                        |
-| **1.18, 1.18.1**   | 6.5.2 - 9.3.0               | 9.3.0                        | 16                                                        |
-| **1.18.2**         | 6.5.4 - 9.3.0               | 9.3.0                        | 16                                                        |
-| **1.19**           | 8.3.0 - 9.3.0               | 9.3.0                        | 16                                                        |
-| **1.19.1**         | 8.5.0 - 9.3.0               | 9.3.0                        | 16                                                        |
-| **1.19.2**         | 8.5.1 - 9.3.0               | 9.3.0                        | 16                                                        |
-| **1.19.3**         | 8.7.0 - 9.3.0               | 9.3.0                        | 16                                                        |
-| **1.19.4**         | 8.8.0 - 9.3.0               | 9.3.0                        | 16                                                        |
-| **1.20**           | 9.0.2 - 9.3.0               | 9.3.0                        | 16                                                        |
-| **1.20.1**         | 9.0.3 - 9.3.0               | 9.3.0                        | 16                                                        |
-| **1.20.2**         | 9.2.0 - 9.3.0               | 9.3.0                        | 16                                                        |
-| **1.20.3, 1.20.4** | 9.3.0                       | 9.3.0                        | 16                                                        |
+| **1.16.1**         | v3.0 - 5.12, 8.3.0  - 9.4.2 | 9.4.2                        | 16                                                        |
+| **1.16.2**         | v4.0 - 5.12, 8.3.0  - 9.4.2 | 9.4.2                        | 16                                                        |
+| **1.16.3**         | v4.2 - 5.12, 8.3.0  - 9.4.2 | 9.4.2                        | 16                                                        |
+| **1.16.4**         | v5.2 - 5.12, 8.3.0  - 9.4.2 | 9.4.2                        | 16                                                        |
+| **1.16.5**         | v5.7 - 7.0.0, 8.3.0 - 9.5.1 | 9.5.1                        | 16                                                        |
+| **1.17**           | 6.0.x - 9.5.1               | 9.5.1                        | 16                                                        |
+| **1.17.1**         | 6.1.x - 9.5.1               | 9.5.1                        | 16                                                        |
+| **1.18, 1.18.1**   | 6.5.2 - 9.5.1               | 9.5.1                        | 16                                                        |
+| **1.18.2**         | 6.5.4 - 9.5.1               | 9.5.1                        | 16                                                        |
+| **1.19**           | 8.3.0 - 9.5.1               | 9.5.1                        | 16                                                        |
+| **1.19.1**         | 8.5.0 - 9.5.1               | 9.5.1                        | 16                                                        |
+| **1.19.2**         | 8.5.1 - 9.5.1               | 9.5.1                        | 16                                                        |
+| **1.19.3**         | 8.7.0 - 9.5.1               | 9.5.1                        | 16                                                        |
+| **1.19.4**         | 8.8.0 - 9.5.1               | 9.5.1                        | 16                                                        |
+| **1.20**           | 9.0.2 - 9.5.1               | 9.5.1                        | 16                                                        |
+| **1.20.1**         | 9.0.3 - 9.5.1               | 9.5.1                        | 16                                                        |
+| **1.20.2**         | 9.2.0 - 9.5.1               | 9.5.1                        | 16                                                        |
+| **1.20.3, 1.20.4** | 9.3.0 - 9.5.1               | 9.5.1                        | 16                                                        |
+| **1.20.5, 1.20.6** | 9.4.0 - 9.5.1               | 9.5.1                        | 16                                                        |
+| **1.21**           | 9.5.0 - 9.5.1               | 9.5.1                        | 16                                                        |
 
 -----
 
@@ -318,14 +320,6 @@ plugins-to-convert:
 
 -----
 
-## Dependencies
-
-Bukkit plugin (shaded) dependencies:
-
-- [Item-NBT-API](https://github.com/tr7zw/Item-NBT-API) (MIT License)
-
------
-
 ## Building the CommandAPI
 
 The CommandAPI is built using the Maven build tool - if you don't have it, you can download it [here](https://maven.apache.org/download.cgi).
@@ -379,7 +373,7 @@ The resulting compiled documentation is found in `docs/X.X.X`, where `X.X.X` is 
 
 ## CommandAPI Project Timeline
 
-This is the current roadmap for the CommandAPI (as of 11th May 2023):
+This is the current roadmap for the CommandAPI (as of 30th April 2024):
 
 - **10.0.0:**
 
@@ -415,11 +409,76 @@ This is the current roadmap for the CommandAPI (as of 11th May 2023):
     </thead>
     <tbody>
         <tr>
-            <td valign="top"><b>9.4.0</b></td>
+            <td valign="top"><b>9.6.0</b></td>
             <td valign="top">???</td>
             <td valign="top">
                 <ul>
-                    <li>https://github.com/JorelAli/CommandAPI/issues/495 Adds a parameter to `EntitySelectorArgument` to allow failure when no entity lists are empty</li>
+                    <li>https://github.com/JorelAli/CommandAPI/issues/577 Adds a <code>CommandAPIBukkit#failWithAdventureComponent(ComponentLike)</code> method</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top"><b>9.5.1</b></td>
+            <td valign="top">June 2024</td>
+            <td valign="top">
+                <ul>
+                    <li>Fixes the CommandAPI not loading properly on Paper 1.21</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top"><b>9.5.0</b></td>
+            <td valign="top">June 2024</td>
+            <td valign="top">
+                <ul>
+                    <li>Adds support for Minecraft 1.21</li>
+                    <li>Drops support for Minecraft 1.16.1, 1.16.2, 1.16.3 and 1.16.4</li>
+                    <li>Fixes <code>ResourceLocationArgument</code> not working in 1.20.5 and 1.20.6</li>
+                    <li>Fixes <code>/minecraft:reload</code> deleting commands on Paper 1.20.6 (build 65+)</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top"><b>9.4.2</b></td>
+            <td valign="top">May 2024</td>
+            <td valign="top">
+                <ul>
+                    <li>https://github.com/JorelAli/CommandAPI/pull/555 Hotfix CommandAPI not loading correctly on Paper 1.20.6 build 65+ servers</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top"><b>9.4.1</b></td>
+            <td valign="top">May 2024</td>
+            <td valign="top">
+                <b>CommandAPI Changes:</b>
+                <ul>
+                    <li>https://github.com/JorelAli/CommandAPI/issues/551 Fixes mojang-mapped versions of the CommandAPI causing errors in certain Minecraft versions</li>
+                    <li>https://github.com/JorelAli/CommandAPI/issues/552 Adds a configuration option to disable datapack reloading on server load</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top"><b>9.4.0</b></td>
+            <td valign="top">April 2024</td>
+            <td valign="top">
+                <b>CommandAPI Changes:</b>
+                <ul>
+                    <li>https://github.com/JorelAli/CommandAPI/issues/495 Adds a parameter to <code>EntitySelectorArgument</code> to allow failure when no entity lists are empty</li>
+                    <li>https://github.com/JorelAli/CommandAPI/issues/367, https://github.com/JorelAli/CommandAPI/pull/509 Adds the ability to register commands with a custom namespace</li>
+                    <li>https://github.com/JorelAli/CommandAPI/pull/523 Exposed more details of the <code>CommandPermission</code></li>
+                    <li>https://github.com/JorelAli/CommandAPI/issues/536, https://github.com/JorelAli/CommandAPI/pull/537 Fixes <code>MultiLiteralArgument</code> help displaying the node name instead of the literal text</li>
+                    <li>Fixed implementation issues with <code>FunctionArgument</code></li>
+                    <li>https://github.com/JorelAli/CommandAPI/issues/490 Adds (experimental) support for Mojang-mapped servers via the CommandAPI config</li>
+                    <li>https://github.com/JorelAli/CommandAPI/issues/524 Fixes <code>CommandAPIBukkit.get().getTags()</code> erroring in 1.20.4</li>
+                    <li>https://github.com/JorelAli/CommandAPI/pull/540 Add methods to "safe-cast" arguments to <code>CommandArguments</code></li>
+                    <li>https://github.com/JorelAli/CommandAPI/pull/541 Adds support for a <code>NamespacedKey</code> variant for the <code>PotionEffectArgument</code></li>
+                </ul>
+                <b>Minecraft Version Changes:</b>
+                <ul>
+                    <li>Drops support for version 1.15.x</li>
+                    <li>Adds support for version 1.20.5</li>
+                    <li>Adds support for version 1.20.6</li>
                 </ul>
             </td>
         </tr>

@@ -19,7 +19,7 @@
 	<parent>
 		<artifactId>commandapi-bukkit-nms</artifactId>
 		<groupId>dev.jorel</groupId>
-		<version>9.4.0-SNAPSHOT</version>
+		<version>9.6.0-SNAPSHOT</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
@@ -45,6 +45,16 @@
 		</dependency>
 
 		<!-- NMS-specific implementations -->
+		<dependency>
+			<groupId>dev.jorel</groupId>
+			<artifactId>commandapi-bukkit-1.21</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>dev.jorel</groupId>
+			<artifactId>commandapi-bukkit-1.20.5</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>dev.jorel</groupId>
 			<artifactId>commandapi-bukkit-1.20.3</artifactId>
@@ -103,26 +113,6 @@
 		<dependency>
 			<groupId>dev.jorel</groupId>
 			<artifactId>commandapi-bukkit-1.16.5</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>dev.jorel</groupId>
-			<artifactId>commandapi-bukkit-1.16.4</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>dev.jorel</groupId>
-			<artifactId>commandapi-bukkit-1.16.2</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>dev.jorel</groupId>
-			<artifactId>commandapi-bukkit-1.16.1</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>dev.jorel</groupId>
-			<artifactId>commandapi-bukkit-1.15</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 	</dependencies>

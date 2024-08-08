@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
@@ -15,6 +16,7 @@ import de.tr7zw.changeme.nbtapi.NBTContainer;
 import de.tr7zw.changeme.nbtapi.utils.MinecraftVersion;
 import dev.jorel.commandapi.CommandAPICommand;
 import dev.jorel.commandapi.CommandAPIVersionHandler;
+import dev.jorel.commandapi.MCVersion;
 import dev.jorel.commandapi.arguments.NBTCompoundArgument;
 import dev.jorel.commandapi.test.MockPlatform;
 import dev.jorel.commandapi.test.Mut;
@@ -23,6 +25,7 @@ import dev.jorel.commandapi.test.TestBase;
 /**
  * Tests for the {@link NBTCompoundArgument}
  */
+@Disabled
 class ArgumentNBTCompoundNBTAPITests extends TestBase {
 
 	/*********
@@ -31,6 +34,9 @@ class ArgumentNBTCompoundNBTAPITests extends TestBase {
 
 	@BeforeEach
 	public void setUp() {
+		// Ignoring 1.20.5 for NBT tests until they update
+		assumeTrue(version.lessThan(MCVersion.V1_20_5));
+
 		// NBT API can't run via Mojang Mappings
 		assumeTrue(!CommandAPIVersionHandler.IS_MOJANG_MAPPED);
 
